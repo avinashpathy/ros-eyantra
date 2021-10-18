@@ -1,0 +1,34 @@
+<launch>
+    
+    <!-- Spawn Task-2 Models in Gazebo -->
+    <include file="$(find pkg_vb_sim)/launch/task4_simulation.launch" />
+      <group ns = "ur5_1">
+      <include file = "$(find pkg_moveit_ur5_1)/launch/move_group.launch" />
+      <arg name="publish_monitored_planning_scene" value="true"/>
+     
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+      <param name="/use_gui" value="false"/>
+      <rosparam param="/source_list">[/joint_states]</rosparam>
+    </node>
+    <arg name="use_rviz" default="true" />
+  <include file ="$(find pkg_moveit_ur5_1)/launch/moveit_rviz.launch" if="$(arg use_rviz)">
+    <arg name="rviz_config" value="$(find pkg_moveit_ur5_1)/launch/moveit.rviz"/>
+  </include>
+    </group>
+    <group ns = "ur5_2">
+      <include file = "$(find pkg_moveit_ur5_2)/launch/move_group.launch" />
+      <arg name="publish_monitored_planning_scene" value="true"/>
+     
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+      <param name="/use_gui" value="false"/>
+      <rosparam param="/source_list">[/joint_states]</rosparam>
+    </node>
+     <arg name="use_rviz" default="true" />
+  <include file ="$(find pkg_moveit_ur5_2)/launch/moveit_rviz.launch" if="$(arg use_rviz)">
+    <arg name="rviz_config" value="$(find pkg_moveit_ur5_2)/launch/moveit.rviz"/>
+  </include>
+    </group>
+   
+   
+   
+</launch>

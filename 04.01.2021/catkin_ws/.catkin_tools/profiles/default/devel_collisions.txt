@@ -1,0 +1,2 @@
+/home/avinash/catkin_ws/devel/lib/libROSLogicalCameraPlugin.so 11
+/home/avinash/catkin_ws/devel/./cmake.lock 439
